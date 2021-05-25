@@ -1,0 +1,38 @@
+.detectBody{
+    min-height: calc(100vh - 56px);
+}
+
+.inputThumbnail{
+    width: 60%;
+    border: grey solid 1px;
+}
+
+.loader{
+    width: 3rem;
+}
+
+.resultDiv{
+    width:60%;
+    position: relative;
+}
+
+.resultThumbnail{
+    width:100%;
+}
+
+.boundingBox{
+    position: absolute;
+    border:solid 2px green;
+}
+
+.boundingBoxLabel{
+    background: green;
+    padding: 0.4rem;
+    font-size: 0.8rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: white;
+    max-width: 100%;
+    overflow: hidden;
+}

@@ -1,0 +1,24 @@
+.bgImage{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    opacity: 0.95;
+}
+
+.homeBody{
+    height: calc(100vh - 56px);
+    background: #e8f6ff;
+}
+
+.buttonContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 10rem;
+}
+
+.detectButton{
+    background-color: #2ba0d3;
+    border-color: #2ba0d3;
+}
