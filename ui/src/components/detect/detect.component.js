@@ -83,28 +83,56 @@ export default class Navbar extends Component {
       step: 2
     });
 
-    const params = {
-      Image: { /* required */
-        Bytes: Buffer.from(byteArray) /* Strings will be Base-64 encoded on your behalf */,
-      },
+   
+
+    let formData = new FormData();
+    formData.append("image", this.state.file);
+
+    console.log(this.state.file);
+
+    // Flask API //
+    const requestOptions = {
+      method: 'POST',
+      mode: 'cors',
+      body: formData
     };
-    this.rekognition.detectLabels(params, function(err, data) {
-      if (err){
-        console.log(err, err.stack); // an error occurred
+    fetch('http://localhost:5000/flaskapi', requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
         that.setState({
-          loading: false,
-        });
-      }
-      else{
-        console.log(data);           // successful response
-        that.setState({
-          loading: false,
-          step: 3,
-          boxes: data.Labels[0].Instances,
-          detections: data.Labels
-        });
-      }
+        loading: false,
+        step: 3,
+        boxes: data.Labels[0].Instances,
+        detections: data.Labels
+      });
     });
+
+
+    // AWS JavaScript SDK //
+
+    // const params = {
+    //   Image: { /* required */
+    //     Bytes: Buffer.from(byteArray) /* Strings will be Base-64 encoded on your behalf */,
+    //   },
+    // };
+    // this.rekognition.detectLabels(params, function(err, data) {
+    //   if (err){
+    //     console.log(err, err.stack); // an error occurred
+    //     that.setState({
+    //       loading: false,
+    //     });
+    //   }
+    //   else{
+    //     console.log(data);           // successful response
+    //     that.setState({
+    //       loading: false,
+    //       step: 3,
+    //       boxes: data.Labels[0].Instances,
+    //       detections: data.Labels
+    //     });
+    //   }
+    // });
   }
 
   nameChanged(event){
@@ -137,7 +165,7 @@ export default class Navbar extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(dataToSend)
     };
-    fetch('http://localhost:5000/inputs/add', requestOptions)
+    fetch('http://localhost:5001/inputs/add', requestOptions)
       .then(response => response.json())
       .then(data => {
         console.log(data);

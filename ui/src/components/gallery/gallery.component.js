@@ -19,7 +19,7 @@ export default class Navbar extends Component {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     };
-    fetch('http://localhost:5000/inputs/', requestOptions)
+    fetch('http://localhost:5001/inputs/', requestOptions)
       .then(response => response.json())
       .then(data => {
         console.log(data)
